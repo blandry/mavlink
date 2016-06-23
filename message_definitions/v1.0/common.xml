@@ -3442,6 +3442,16 @@
            <field type="uint8_t" name="len">data length</field>
            <field type="uint8_t[180]" name="data">RTCM message (may be fragmented)</field>
         </message>
+        <message id="234" name="PREARM_CHECK_REPORT">
+               <description>The status of any pre-arm checks (checks performed before takeoff)</description>
+               <field type="uint64_t" name="enabled_checks">bitmask of enabled checks (0=disabled, 1=enabled)</field>
+               <field type="uint64_t" name="passed_checks">bitmask of passed checks (0=failed, 1=passed).  Bitmask of passed checks = (enabled_checks AND passed_checks), Bitmask of failed checks = (enabled_checks AND ~passed_checks)</field>
+        </message>
+        <message id="235" name="PREARM_CHECK_FAILURE_CODE">
+               <description>Failure code for a single failed check.  Code's text description should be looked up in Arming.xml and displayed to user</description>
+               <field type="uint8_t" name="check_id">corresponds to bit position of PREARM_CHECK_REPORT's enabled_checks field</field>
+               <field type="uint32_t" name="code">failure code (autopilot specific, corresponding text should be looked up in Arming.xml)</field>
+        </message>
         <message id="241" name="VIBRATION">
             <description>Vibration levels and accelerometer clipping</description>
             <field type="uint64_t" name="time_usec">Timestamp (micros since boot or Unix epoch)</field>
